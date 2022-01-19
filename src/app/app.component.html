@@ -1,7 +1,8 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-5">
-        <h3 class="bg-primary text-white p-3">Sumeyye To Do List</h3>
+        <h3 class="bg-primary text-white p-3">
+           {{user}} To Do List</h3>
         <div class="input-group">
           <input type="text" class="form-control">
           <div class="input-group-append">
@@ -21,24 +22,9 @@
           </thead>
 
           <tbody>
-            <tr>
-              <th>Kahvaltı</th>
-              <th>No</th>
-            </tr>
-
-            <tr>
-              <th>Spor</th>
-              <th>No</th>
-            </tr>
-
-            <tr>
-              <th>Kod Yazma</th>
-              <th>No</th>
-            </tr>
-
-            <tr>
-              <th>Alışveriş</th>
-              <th>No</th>
+            <tr *ngFor="let item of items">
+              <td>{{item.description}}</td>
+              <td>{{item.action}}</td>
             </tr>
           </tbody>
         </table>
