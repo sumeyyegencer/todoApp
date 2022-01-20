@@ -2,29 +2,50 @@
   <div class="row justify-content-center">
     <div class="col-md-5">
         <h3 class="bg-primary text-white p-3">
-           {{user}} To Do List</h3>
+           {{ getName() }} To Do List</h3>
         <div class="input-group">
-          <input type="text" class="form-control">
+          <input type="text" #todoText class="form-control">
           <div class="input-group-append">
-            <button class="btn btn-primary">
+            <button class="btn btn-primary" (click)="addItem(todoText.value); todoText.value=''; ">
               Add
             </button>
           </div>
+        </div>
+
+        <div class="custom-control control-checkbox my-3">
+          <input type="checkbox" [(ngModel)]="isDisplay" class="custom-control-input" name="" id="displayAll">
+          <label class="custom-control-label" for="displayAll">Display All</label>
         </div>
 
         <table class="table table-bordered table-hover mt-3">
 
           <thead>
             <tr>
+              <th></th>
               <th>Description</th>
               <th>Action</th>
             </tr>
           </thead>
 
           <tbody>
-            <tr *ngFor="let item of items">
-              <td>{{item.description}}</td>
-              <td>{{item.action}}</td>
+            <tr *ngFor="let item of getItems(); let i=index">
+              <td>{{i+1}}</td>
+              <td>{{item.description}}</td> <!--Tek yönlü bağlama. ts dosyasındaki datadan -> html etiketine-->
+
+              <td>
+                <input type="checkbox" [(ngModel)]="item.action" >  <!--Çift yönlü bağlama. Html ve data arasında senkronize bir iletişim kurduk.(ngModel)-->
+              </td>
+
+
+              <td [ngSwitch]="item.action">
+                <span *ngSwitchCase="true">
+                  Yes
+                </span>
+                <span *ngSwitchCase="false">
+                  No
+                </span>
+              </td>
+
             </tr>
           </tbody>
         </table>
